@@ -1,15 +1,19 @@
 # client.py
 
 import socket
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(('192.168.4.1', 800))
+import sys
 
 def main():
-	sock.sendall('hello, pico!')
-	sock.sendall('hello, pico!')
-	sock.sendall('hello, pico!')
-	sock.close()
+	if len(sys.argv) == 1:
+		print("To run this program: client.py xxx.xxx.x.x")
+		exit()
+	else: 
+		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		sock.connect((sys.argv[1], 800))
+		sock.sendall(b'hello, pico!')
+		sock.sendall(b'hello, pico!')
+		sock.sendall(b'hello, pico!')
+		sock.close()
 
 if __name__ == '__main__':
 	main()
